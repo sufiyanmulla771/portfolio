@@ -1,208 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohammad Sufiyan Mulla — Penetration Tester</title>
-<link rel="stylesheet" href="styles.css" />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Sufiyan Mulla | Penetration Tester</title>
+  <meta name="description" content="Cybersecurity & Penetration Testing Portfolio of Mohammad Sufiyan Mulla" />
 
+  <style>
+    /* ================= THEME SWITCHER ================= */
+    body.red { --neon:#ff3b3b; --accent:#ff7a7a; }
+    body.blue { --neon:#00f7ff; --accent:#7c7cff; }
+
+    .theme-toggle {
+      display:flex; gap:8px;
+    }
+    .theme-toggle button{
+      width:14px; height:14px; border-radius:50%; border:none; cursor:pointer;
+    }
+    .theme-toggle .red{background:#ff3b3b;}
+    .theme-toggle .blue{background:#00f7ff;}
+
+    /* ================= RESET ================= */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
+      background: radial-gradient(circle at top, #0b1020, #02040a 70%);
+      color: #e5e7eb;
+      line-height: 1.7;
+    }
+
+    /* ================= VARIABLES ================= */
+    :root {
+      --neon: #00f7ff;
+      --accent: #7c7cff;
+      --danger: #ff3b3b;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.12);
+    }
+
+    /* ================= GLOBAL ================= */
+    a { color: var(--neon); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    section { padding: 80px 20px; }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 3px;
+      background: var(--neon);
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* ================= NAVBAR ================= */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 999;
+      background: rgba(2,4,10,0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+    }
+
+    nav h1 {
+      font-size: 1.1rem;
+      color: var(--neon);
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .menu-toggle{display:none;cursor:pointer;font-size:1.4rem;}
+    @media(max-width:900px){
+      nav ul{display:none;position:absolute;top:60px;right:20px;background:#02040a;padding:16px;border-radius:12px;flex-direction:column;}
+      nav ul.show{display:flex;}
+      .menu-toggle{display:block;}
+    }
+
+    nav ul li a {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    nav ul li a:hover { opacity: 1; }
+
+    /* ================= HERO ================= */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding-top: 120px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+    }
+
+    .hero h2 span { color: var(--neon); }
+
+    .hero p {
+      margin: 20px 0;
+      max-width: 520px;
+      opacity: 0.9;
+    }
+
+    .hero .buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--neon), var(--accent));
+      color: #000;
+      border: none;
+      font-weight: 600;
+    }
+
+    .profile-img {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--neon);
+      box-shadow: 0 0 45px rgba(0,247,255,0.25);
+      margin-left: auto;
+    }
+    .profile-img img{width:100%;height:100%;object-fit:cover;}
+
+    /* ================= ABOUT ================= */
+    .about p { max-width: 900px; }
+
+    /* ================= GRID SECTIONS ================= */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 20px;
+      text-align: center;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+      .hero h2 { font-size: 2.1rem; }
+    }
+  </style>
+</head>
 <body>
 
-<!-- Header -->
-<header class="header">
-  <div class="container nav-container">
-    <div class="logo">SUFI. </div>
-    <button class="menu-toggle" id="menuToggle" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-    <nav id="navMenu">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
+<header>
+  <nav>
+  <h1>Mohammad Sufiyan Mulla</h1>
+
+  <div class="theme-toggle">
+    <button class="red" onclick="setTheme('red')"></button>
+    <button class="blue" onclick="setTheme('blue')"></button>
   </div>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <!-- MAIN MENU -->
+  <ul id="menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
 </header>
 
-<!-- Hero Section -->
 <section class="hero">
+  <div class="terminal">Initializing security shell...<span>|</span></div>
   <div class="container hero-grid">
-    <div class="hero-text">
-      <h1>Mohammad<br> Sufiyan Mulla</h1>
-      <p class="tagline">Penetration Tester • Ethical Hacker • Cybersecurity Analyst</p>
-      <p class="summary">
-        Certified penetration tester with hands-on experience in web application testing,
-        exploitation, SQLi research, cloud systems, and vulnerability analysis.
+    <div>
+      <h2>Penetration Tester & <span>Cybersecurity Researcher</span></h2>
+      <p>
+        Web Application Penetration Tester with 1+ year of hands-on experience in bug hunting, freelancing,
+        internships, and real-world vulnerability research. Specialized in WAPT,
+        OWASP Top 10, and professional security reporting.
       </p>
-
-      <div class="cta">
-        <a href="#contact" class="btn">Contact Me</a>
-        <a href="mohammadsufiyan_resume.pdf" download class="btn-outline">Download CV</a>
+      <div class="buttons">
+        <a class="btn primary" href="Sufi.pdf" download>Download Resume</a>
+        <a class="btn primary" href="#contact">Hire Me</a>
+        <a class="btn" href="https://sufiyanmulla771.github.io/portfolio/" target="_blank">Live Portfolio</a>
       </div>
     </div>
 
-    <div class="hero-image">
-      <img src="sufiii.jpg" alt="Profile Photo">
+    <div class="profile-img">
+      <img src="image.jpeg" alt="Mohammad Sufiyan Mulla" />
     </div>
   </div>
 </section>
 
-<!-- About -->
-<section id="about" class="section">
+<section id="about">
   <div class="container">
-    <h2>About Me</h2>
-    <p class="section-text">
-      I am a Certified Penetration Tester with strong knowledge of VAPT,
-      exploitation techniques, OWASP Top 10, cloud security, Active Directory,
-      and thick-client pentesting. Passionate about security assessments
-      and real-time cybersecurity operations.
+    <h3 class="section-title">About Me</h3>
+    <p>
+      I am a certified penetration tester with strong experience in identifying,
+      exploiting, and responsibly reporting real-world security vulnerabilities.
+      My work spans SQL Injection, XSS, IDOR, file upload flaws, WordPress security,
+      API pentesting, and backend response analysis. I actively use industry tools
+      like Burp Suite, SQLMap, Nmap, Metasploit, and Kali Linux.
     </p>
   </div>
 </section>
 
-<!-- Projects -->
-<section id="projects" class="section">
+<section id="experience">
   <div class="container">
-    <h2>Projects</h2>
+    <h3 class="section-title">Professional Experience</h3>
+    <div class="grid">
 
-    <div class="card">
-      <h3>SQL Injection & DB Security — Freelancing</h3>
-      <p>Performed complete penetration test on DpBoss using Burp Suite and SQLMap.</p>
-    </div>
-
-    <div class="card">
-      <h3>Bug Bounty Research</h3>
-      <p>Reported two SQL injection vulnerabilities through responsible disclosure.</p>
-    </div>
-
-    <div class="card">
-      <h3>Exomate Forearm — IoT Project</h3>
-      <p>Funded by NAIN, Govt. of Karnataka. Wearable support device.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Experience -->
-<section id="experience" class="section">
-  <div class="container">
-    <h2>Experience</h2>
-
-    <div class="card">
-      <h3>Cybersecurity Intern — Unified Mentor</h3>
-      <p class="date">Nov 2025 – Present</p>
-      <p>Conducting VAPT, threat analysis, incident response, and log monitoring.</p>
-    </div>
-
-    <div class="card">
-      <h3>Cloud Developer Intern — Rooman Technologies</h3>
-      <p class="date">Feb 2025 – May 2025</p>
-      <p>Worked on cloud app design, deployment, API integration, and infra management.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Skills with Logos -->
-<section id="skills" class="section">
-  <div class="container">
-    <h2>Skills, Tools & Platforms</h2>
-
-    <div class="skills-grid">
-
-      <div class="skill-card">
-        <h4>Vulnerabilities</h4>
-        <ul>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/993/993515.png"> SQL Injection</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/2058/2058148.png"> XSS</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png"> IDOR</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/753/753318.png"> DoS Attack</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/2965/2965323.png"> WordPress Security</li>
-          <li><img src="https://cdn-icons-png.flaticon.com/512/992/992700.png"> Privilege Escalation</li>
-        </ul>
+      <div class="card">
+        <h4>Cybersecurity Intern</h4>
+        <p><strong>Unified Mentor Private Limited</strong> | Nov 2025 – Present</p>
+        <p>
+          Currently working as a Cybersecurity Intern, actively involved in real-time security operations,
+          ethical hacking activities, and hands-on vulnerability assessment projects. My responsibilities
+          include vulnerability scanning, reconnaissance, log analysis, and assisting in incident response.
+          I regularly test web applications against OWASP Top 10 vulnerabilities and practice Web
+          Application Penetration Testing (WAPT) methodologies in controlled lab and real-time environments.
+        </p>
+        <p>
+          I work extensively with professional tools such as Burp Suite, Nmap, SQLMap, Wireshark,
+          Kali Linux, and other penetration testing utilities to perform manual and automated testing.
+          This role has significantly strengthened my analytical thinking, reporting skills, and
+          understanding of real-world attack surfaces.
+        </p>
       </div>
 
-      <div class="skill-card">
-        <h4>Tools</h4>
-        <ul>
-          <li><img src="https://www.kali.org/tools/burpsuite/images/burpsuite-logo.svg"> Burp Suite</li>
-          <li><img src="https://nmap.org/images/nmap-logo-256x256.png"> Nmap</li>
-          <li><img src="https://www.metasploit.com/images/metasploit-logo.svg"> Metasploit</li>
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Sqlmap-logo.png"> SQLMap</li>
-          <li><img src="https://www.kali.org/tools/hydra/images/hydra-logo.svg"> Hydra</li>
-          <li><img src="https://hashcat.net/favicon.ico"> Hashcat</li>
-          <li><img src="https://wpscan.com/wp-content/uploads/2022/07/wpscan-logo-red.svg"> WPScan</li>
-          <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Nikto-logo.png/600px-Nikto-logo.png"> Nikto</li>
-        </ul>
+      <div class="card">
+        <h4>Security Researcher – Independent Bug Bounty Hunter</h4>
+        <p><strong>Bugcrowd & HackenProof</strong> | Dec 2024 – Present</p>
+        <p>
+          Working as an independent security researcher focusing on web application security and
+          responsible vulnerability disclosure. I have identified and reported real-world SQL Injection
+          vulnerabilities on production websites, including platforms without official bug bounty
+          programs.
+        </p>
+        <p>
+          My work involves manual testing using Burp Suite for payload manipulation, parameter tampering,
+          and request interception, followed by automated validation using SQLMap. I perform backend
+          response analysis, develop precise proof-of-concept payloads, and deliver professional
+          vulnerability reports with clear remediation guidance.
+        </p>
       </div>
 
-      <div class="skill-card">
-        <h4>Platforms</h4>
-        <ul>
-          <li><img src="https://assets.tryhackme.com/img/THMlogo.png"> TryHackMe</li>
-          <li><img src="https://www.vulnhub.com/static/img/logo.png"> VulnHub</li>
-          <li><img src="https://portswigger.net/content/images/logos/logo.svg"> PortSwigger Academy</li>
-          <li><img src="https://dvwa.co.uk/images/logo.png"> DVWA</li>
-          <li><img src="https://www.offsec.com/wp-content/uploads/2021/05/metasploitable.png"> Metasploitable 2</li>
-        </ul>
-      </div>
+      
 
     </div>
   </div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="section">
+<section id="skills">
+  <style>
+    .skill{margin-bottom:16px;}
+    .skill span{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:6px;}
+    .bar{height:8px;background:#1f2937;border-radius:10px;overflow:hidden;}
+    .bar div{height:100%;width:0;background:linear-gradient(90deg,var(--neon),var(--accent));border-radius:10px;animation:fill 2s forwards;}
+    @keyframes fill{to{width:var(--level);}}
+  </style>
   <div class="container">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:sufiyanmulla771@gmail.com">sufiyanmulla771@gmail.com</a></p>
-    <p>Phone: +91 93536 55818</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/mohammad-sufiyan-mulla-41217737a" target="_blank">Click Here</a></p>
+    <h3 class="section-title">Skills & Tools</h3>
+    <div class="grid">
+      <div class="card">SQL Injection (SQLi), XSS, IDOR, File Upload</div>
+      <div class="card">OWASP Top 10, WAPT, VAPT</div>
+      <div class="card">Burp Suite, SQLMap, Nmap</div>
+      <div class="card">Metasploit, Wireshark, Kali Linux</div>
+      <div class="card">Linux & Windows Privilege Escalation</div>
+      <div class="card">TryHackMe, VulnHub, PortSwigger Labs</div>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
-  <p>© 2025 Mohammad Sufiyan Mulla</p>
+<section id="certifications">
+  <div class="container">
+    <h3 class="section-title">Certifications</h3>
+
+    <div class="grid">
+      <div class="card">
+        <h4>Certified Penetration Tester (CPT)</h4>
+        <p><strong>The Red Team Hacker Academy</strong></p>
+        <p>
+          Advanced penetration testing certification covering Network Security,
+          Web Application Testing, Vulnerability Assessment, Active Directory
+          Pentesting, Wireless Security, Docker, Cloud Security, and Thick Client
+          Pentesting.
+        </p>
+      </div>
+
+      <div class="card">
+        <h4>Cloud Application Developer</h4>
+        <p><strong>Rooman Technologies Pvt. Ltd.</strong></p>
+        <p>
+          Certification focused on cloud application development, deployment,
+          API integration, and scalable architecture design aligned with modern
+          industry standards.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h3 class="section-title">Projects</h3>
+    <div class="grid">
+      <div class="card">
+        <h4>Exomate Forearm (Final Year Project)</h4>
+        <p>
+          Wearable forearm support device funded by NAIN, Govt. of Karnataka
+          with a grant of ₹1.25 Lakhs.
+        </p>
+      </div>
+
+      <div class="card">
+        <h4>Freelance SQL Injection Security Audit</h4>
+        <p>
+          Performed end-to-end SQLi testing, database security hardening,
+          exploitation, remediation, and retesting with clean final report.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h3 class="section-title">Contact</h3>
+    <div class="card">
+      <p>Email: <a href="mailto:sufiyanmulla771@gmail.com">sufiyanmulla771@gmail.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/mohammadsufiyanmulla/" target="_blank">linkedin.com/in/mohammadsufiyanmulla</a></p>
+      <p>Phone: +91 9353655818</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Mohammad Sufiyan Mulla · Cybersecurity Portfolio
 </footer>
 
 <script>
-  const menuToggle = document.getElementById('menuToggle');
-  const navMenu = document.getElementById('navMenu');
+function toggleMenu(){document.getElementById('menu').classList.toggle('show');}
+function setTheme(t){document.body.className=t;}
 
-  menuToggle.addEventListener('click', () => {
-    const isActive = navMenu.classList.toggle('active');
-    menuToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-  });
-
-  // Close menu when a link is clicked
-  document.querySelectorAll('#navMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuToggle.focus();
-    }
-  });
-
-  // Close when clicking outside the nav on small screens
-  document.addEventListener('click', (e) => {
-    const isClickInside = navMenu.contains(e.target) || menuToggle.contains(e.target);
-    if (!isClickInside && navMenu.classList.contains('active')) {
-      navMenu.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
+// terminal intro
+setTimeout(()=>{
+  document.querySelector('.terminal').style.display='none';
+},2500);
 </script>
 </body>
 </html>
-
-
